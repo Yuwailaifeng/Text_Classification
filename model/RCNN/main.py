@@ -14,6 +14,21 @@ from keras.preprocessing import sequence
 
 from rcnn import RCNN
 
+import keras
+from keras import backend
+import tensorflow as tf
+print(tf.__version__)
+print(tf.test.is_gpu_available())
+# tf.debugging.set_log_device_placement(True)
+
+gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.7)
+config = tf.ConfigProto(log_device_placement=False, gpu_options=gpu_options)
+config.gpu_options.per_process_gpu_memory_fraction = 0.7
+keras.backend.tensorflow_backend.set_session(tf.Session(config=config))
+session = tf.Session(config=config)
+
+
+
 max_features = 5000
 maxlen = 400
 batch_size = 32
